@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0a10">
+<meta name="description" content="Tavro AI — Sorularını sor, yeni şeyler öğren.">
+<title>Tavro AI</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0a10;--panel:#14121c;--line:#ffffff16;--text:#f5f2fb;--muted:#9992a5;--purple:#9b7bff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -30%,#37265d66,transparent 55%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}.app{min-height:100vh;display:flex;flex-direction:column}.top{height:70px;padding:0 5vw;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.7px}.mark{height:35px;width:35px;border-radius:12px;background:linear-gradient(145deg,#b39aff,#6543cc);display:grid;place-items:center;font-size:21px;box-shadow:0 5px 25px #8c69ff55}.logo b{color:#b39aff}.spacer{flex:1}.quota{font-size:12px;color:#d3cce0;border:1px solid var(--line);border-radius:30px;padding:9px 13px}.new{background:#ffffff0a;border:1px solid var(--line);color:#eee9f7;border-radius:10px;padding:10px 13px;cursor:pointer}.main{width:min(820px,calc(100% - 32px));margin:0 auto;flex:1;display:flex;flex-direction:column}.welcome{text-align:center;margin:auto 0 25px;padding-top:40px}.hero{width:62px;height:62px;border-radius:20px;background:linear-gradient(145deg,#ad95ff,#6748cf);display:grid;place-items:center;margin:0 auto 23px;font-size:34px;font-weight:800;box-shadow:0 10px 45px #8d6af044}.eyebrow{color:#ad93ff;font-size:10px;font-weight:700;letter-spacing:2px}h1{font-size:clamp(30px,5vw,46px);letter-spacing:-2px;margin:13px 0}h1 span{background:linear-gradient(90deg,#d0c1ff,#9674ff);background-clip:text;color:transparent}.sub{color:var(--muted);font-size:14px;margin:0 auto 30px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:11px;text-align:left}.card{display:flex;align-items:center;gap:12px;background:#ffffff06;border:1px solid var(--line);border-radius:13px;padding:15px;color:var(--text);cursor:pointer;text-align:left;transition:.2s}.card:hover{border-color:#a68aff77;background:#a68aff0d;transform:translateY(-2px)}.ico{width:34px;height:34px;flex-shrink:0;border-radius:10px;display:grid;place-items:center;background:#a68aff20;color:#c3b0ff}.card strong{display:block;font-size:12px}.card small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.arr{margin-left:auto;color:#777}.chat{padding:28px 0 22px;flex:1;overflow:auto;display:flex;flex-direction:column;gap:22px}.message{display:flex;gap:12px;align-items:flex-start}.avatar{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:#8766e9;display:grid;place-items:center;font-weight:800}.user .avatar{background:#2b2735}.body{min-width:0;flex:1}.who{font-size:11px;color:#aaa2b5;margin:2px 0 8px}.content{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.75;color:#e8e2f0}.actions{margin-top:9px}.copy{border:1px solid var(--line);background:#ffffff08;color:#cfc7dc;padding:6px 9px;border-radius:7px;cursor:pointer;font-size:10px}.sources{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}.sources b{display:block;color:#b8a4ff;font-size:11px;margin-bottom:7px}.sources a{display:block;color:#b6a0ff;font-size:11px;margin:6px 0;overflow-wrap:anywhere}.code{margin:10px 0;background:#09080e;border:1px solid var(--line);border-radius:10px;overflow:hidden}.codehead{display:flex;justify-content:space-between;padding:8px 11px;background:#ffffff09;color:#aaa;font-size:10px}.code pre{padding:12px;margin:0;overflow:auto;font-size:12px}.typing{display:flex;gap:5px;padding:7px}.typing i{height:6px;width:6px;border-radius:50%;background:#b29aff;animation:blink 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}@keyframes blink{50%{opacity:.25;transform:translateY(-4px)}}.composer-area{width:min(820px,calc(100% - 32px));margin:0 auto 18px}.composer{background:#17141f;border:1px solid #5e4b86;border-radius:16px;padding:12px 13px 10px}.composer:focus-within{border-color:#a68aff;box-shadow:0 0 0 3px #a68aff18}textarea{display:block;width:100%;resize:none;max-height:150px;min-height:30px;background:none;border:0;outline:0;color:var(--text);font:14px/1.5 inherit}textarea::placeholder{color:#827b8d}.bottom{display:flex;align-items:center;justify-content:space-between;margin-top:8px}.hint,.disclaimer{font-size:10px;color:#777182}.send{height:35px;width:35px;border:0;border-radius:11px;background:linear-gradient(145deg,#b49cff,#7654dc);color:white;font-size:22px;cursor:pointer}.send:disabled{opacity:.4}.disclaimer{text-align:center;margin-top:9px}.hidden{display:none!important}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;transition:.2s;background:#282332;border:1px solid var(--line);padding:11px 15px;border-radius:10px;font-size:12px;max-width:90%;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:600px){.top{height:60px;padding:0 15px}.logo{font-size:17px}.mark{width:31px;height:31px}.quota{font-size:10px;padding:8px}.new{font-size:11px;padding:9px}.welcome{padding-top:20px;margin-bottom:20px}.hero{width:54px;height:54px;font-size:29px}h1{font-size:29px;letter-spacing:-1.2px}.sub{font-size:12px;line-height:1.6;max-width:320px}.cards{gap:8px}.card{padding:10px 8px;gap:8px}.ico{width:29px;height:29px}.card strong{font-size:10px}.card small{font-size:9px}.arr{display:none}.composer-area{margin-bottom:12px}.hint{font-size:9px}.content{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="logo"><span class="mark">T</span><span>Tavro <b>AI</b></span></div><div class="spacer"></div><div class="quota" id="quota">100 / 100 yanıt</div><button class="new" id="newChat">＋ Yeni sohbet</button></header>
+<main class="main">
+<section class="welcome" id="welcome">
+<div class="hero">T</div><div class="eyebrow">YENİ NESİL YAPAY ZEKÂ ASİSTANI</div>
+<h1>Bugün neyi <span>keşfediyoruz?</span></h1><p class="sub">Sorularını sor, yeni şeyler öğren. Fikirlerini birlikte gerçeğe dönüştürelim.</p>
+<div class="cards">
+<button class="card" data-prompt="Bugünün önemli gündem haberlerini güvenilir kaynaklardan araştır ve özetle."><span class="ico">◉</span><span><strong>Gündemi keşfet</strong><small>Güncel haberleri araştır</small></span><span class="arr">↗</span></button>
+<button class="card" data-prompt="Bana geliştirebileceğim özgün ve uygulanabilir bir proje fikri öner."><span class="ico">✳</span><span><strong>Bir şeyler üret</strong><small>Proje ve fikir geliştir</small></span><span class="arr">↗</span></button>
+<button class="card" data-prompt="Bana ilginç ve faydalı yeni bir konuyu basit örneklerle öğret."><span class="ico">⌘</span><span><strong>Yeni bir şey öğren</strong><small>Karmaşık konuları açıkla</small></span><span class="arr">↗</span></button>
+<button class="card" data-prompt="Kendimi geliştirmek için uygulayabileceğim bir öğrenme ve çalışma planı hazırla."><span class="ico">↗</span><span><strong>Kendini geliştir</strong><small>Öğrenme ve çalışma önerileri</small></span><span class="arr">↗</span></button>
+</div></section>
+<section id="chat" class="chat hidden"><div id="messages"></div></section>
+</main>
+<div class="composer-area"><form class="composer" id="form"><textarea id="prompt" rows="1" maxlength="8000" placeholder="Tavro AI'ye bir şey sor..."></textarea><div class="bottom"><span class="hint">Enter ile gönder · Shift + Enter ile yeni satır</span><button class="send" id="send" aria-label="Gönder">↑</button></div></form><div class="disclaimer">Tavro AI hata yapabilir. Önemli bilgileri kaynaklardan doğrula.</div></div>
+</div><div class="toast" id="toast"></div>
+<script>
+const API_URL = "/api/chat";
+const STATUS_URL = "/api/status";
+const $ = s => document.querySelector(s);
+const welcome = $("#welcome"), chat = $("#chat"), messages = $("#messages");
+const promptBox = $("#prompt"), quota = $("#quota");
+const ID_KEY = "tavro_browser_id_v1", HISTORY_KEY = "tavro_html_chats_v1";
+let id = localStorage.getItem(ID_KEY);
+if (!id || !/^[0-9a-f-]{36}$/i.test(id)) {
+  id = crypto.randomUUID();
+  localStorage.setItem(ID_KEY, id);
+}
+let chats = [];
+try {
+  const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+  chats = Array.isArray(saved) ? saved.filter(c =>
+    c && typeof c.id === "string" && Array.isArray(c.messages)
+  ).slice(0, 30) : [];
+} catch { chats = []; }
+let active = null, busy = false, remaining = 100;
+
+function updateQuota(n) {
+  if (Number.isFinite(Number(n))) remaining = Math.max(0, Math.min(100, Number(n)));
+  quota.textContent = `${remaining} / 100 yanıt`;
+  $("#send").disabled = busy || remaining <= 0;
+}
+function toast(t) {
+  const x = $("#toast");
+  x.textContent = String(t || "Bir hata oluştu.");
+  x.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => x.classList.remove("show"), 3800);
+}
+function save() {
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(chats.slice(0, 30))); }
+  catch { toast("Sohbet geçmişi kaydedilemedi. Cihazında depolama alanı açmayı dene."); }
+}
+function newChat() {
+  active = null;
+  messages.replaceChildren();
+  chat.classList.add("hidden");
+  welcome.classList.remove("hidden");
+  promptBox.value = "";
+  promptBox.style.height = "auto";
+  promptBox.focus();
+}
+function current() { return chats.find(x => x.id === active); }
+function ensure(t) {
+  let c = current();
+  if (c) return c;
+  c = { id: crypto.randomUUID(), title: t.slice(0, 40), messages: [] };
+  chats.unshift(c);
+  active = c.id;
+  save();
+  return c;
+}
+function add(role, text, sources = []) {
+  const row = document.createElement("div");
+  row.className = "message" + (role === "user" ? " user" : "");
+  const av = document.createElement("div");
+  av.className = "avatar";
+  av.textContent = role === "assistant" ? "T" : "S";
+  const body = document.createElement("div");
+  body.className = "body";
+  const who = document.createElement("div");
+  who.className = "who";
+  who.textContent = role === "assistant" ? "Tavro AI" : "Sen";
+  const content = document.createElement("div");
+  content.className = "content";
+  content.textContent = text;
+  body.append(who, content);
+  if (role === "assistant" && text !== "Yanıt hazırlanıyor…") {
+    const actions = document.createElement("div");
+    actions.className = "actions";
+    const cp = document.createElement("button");
+    cp.className = "copy";
+    cp.textContent = "Yanıtı kopyala";
+    cp.onclick = () => navigator.clipboard.writeText(text)
+      .then(() => toast("Yanıt kopyalandı."))
+      .catch(() => toast("Kopyalama başarısız oldu."));
+    actions.append(cp);
+    body.append(actions);
+    if (sources.length) {
+      const box = document.createElement("div");
+      box.className = "sources";
+      const b = document.createElement("b");
+      b.textContent = "Kaynaklar";
+      box.append(b);
+      sources.forEach(s => {
+        try {
+          const u = new URL(s.url);
+          if (!["http:", "https:"].includes(u.protocol)) return;
+          const a = document.createElement("a");
+          a.href = u.href; a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.textContent = s.title || u.hostname;
+          box.append(a);
+        } catch {}
+      });
+      body.append(box);
+    }
+  }
+  row.append(av, body);
+  messages.append(row);
+  return row;
+}
+function render() {
+  const c = current();
+  if (!c) return;
+  welcome.classList.add("hidden");
+  chat.classList.remove("hidden");
+  messages.replaceChildren();
+  c.messages.forEach(m => add(m.role, m.content, m.sources || []));
+  chat.scrollTop = chat.scrollHeight;
+}
+async function refresh() {
+  try {
+    const r = await fetch(STATUS_URL + "?browserId=" + encodeURIComponent(id), {
+      headers: { "Accept": "application/json" }
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || "Kota bilgisi alınamadı.");
+    updateQuota(d.remaining);
+  } catch (e) {
+    toast("Günlük hak bilgisi alınamadı: " + e.message);
+  }
+}
+async function send(value) {
+  value = (value ?? promptBox.value).trim();
+  if (!value || busy) return;
+  if (remaining <= 0) {
+    toast("Bugünkü 100 yanıt hakkın doldu. Hakkın Türkiye saatiyle 00.00'da yenilenir.");
+    return;
+  }
+  const c = ensure(value);
+  c.messages.push({ role: "user", content: value });
+  save(); render();
+  promptBox.value = "";
+  promptBox.style.height = "auto";
+  busy = true;
+  $("#send").disabled = true;
+  const pending = add("assistant", "Yanıt hazırlanıyor…");
+  chat.scrollTop = chat.scrollHeight;
+  try {
+    const payload = {
+      browserId: id,
+      messages: c.messages.slice(-20).map(m => ({
+        role: m.role, content: m.content
+      }))
+    };
+    const r = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    let d;
+    try { d = await r.json(); }
+    catch { throw new Error("Sunucudan geçerli bir yanıt alınamadı."); }
+    if (!r.ok) {
+      if (Number.isFinite(d.remaining)) updateQuota(d.remaining);
+      throw new Error(d.error || `Sunucu hatası (${r.status}).`);
+    }
+    if (typeof d.answer !== "string" || !d.answer.trim()) {
+      throw new Error("Groq boş yanıt döndürdü. Yanıt hakkın düşürülmedi.");
+    }
+    pending.remove();
+    c.messages.push({ role: "assistant", content: d.answer, sources: [] });
+    save();
+    add("assistant", d.answer);
+    if (Number.isFinite(d.remaining)) updateQuota(d.remaining);
+    chat.scrollTop = chat.scrollHeight;
+  } catch (e) {
+    pending.remove();
+    // Başarısız kullanıcı mesajını geçmişte tutma; tekrar gönderebilir.
+    const last = c.messages[c.messages.length - 1];
+    if (last && last.role === "user" && last.content === value) c.messages.pop();
+    if (!c.messages.length) chats = chats.filter(x => x.id !== c.id);
+    save();
+    toast(e.message || "İstek başarısız oldu. Lütfen tekrar dene.");
+    await refresh();
+  } finally {
+    busy = false;
+    $("#send").disabled = remaining <= 0;
+    promptBox.focus();
+  }
+}
+$("#form").addEventListener("submit", e => { e.preventDefault(); send(); });
+promptBox.addEventListener("input", () => {
+  promptBox.style.height = "auto";
+  promptBox.style.height = Math.min(promptBox.scrollHeight, 150) + "px";
+});
+promptBox.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    $("#form").requestSubmit();
+  }
+});
+$("#newChat").onclick = newChat;
+document.querySelectorAll(".card").forEach(b => b.onclick = () => send(b.dataset.prompt));
+updateQuota(100);
+refresh();
+</script>
+</body>
+</html>

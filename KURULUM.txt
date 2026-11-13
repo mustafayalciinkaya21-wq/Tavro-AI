@@ -1,0 +1,42 @@
+# Tavro AI — Netlify + Groq
+
+## Dosyalar
+- `index.html`: Var olan Tavro arayüzü korunarak `/api/chat` ve `/api/status` kullanacak şekilde güncellendi.
+- `netlify/functions/chat.mjs`: Groq Chat Completions bağlantısı.
+- `netlify/functions/status.mjs`: Günlük kalan yanıt bilgisini döndürür.
+- `netlify/functions/lib/quota.mjs`: Netlify Blobs üzerinde Türkiye takvim gününe göre kota kaydı.
+- `netlify.toml`: Netlify build ve API yönlendirmeleri.
+- `package.json`: Netlify Blobs bağımlılığı.
+
+## Kurulum
+1. Mesajında paylaştığın eski Groq anahtarını Groq Console üzerinden iptal et. Yeni bir anahtar oluştur.
+2. Bu klasörün tamamını (özellikle `netlify/functions` klasörünü) GitHub deposuna yükle veya Netlify'a deploy et.
+3. Netlify sitesinde **Site configuration → Environment variables** bölümünü aç.
+4. Şu değişkeni ekle:
+   - Key: `GROQ_API_KEY`
+   - Value: Groq Console'da oluşturduğun yeni gizli anahtar.
+   Anahtarı HTML dosyasına, Git deposuna veya buradaki sohbete yazma.
+5. Netlify'da yeniden deploy et. Ortam değişkeni ekledikten sonra yeni deploy gerekir.
+6. Siteyi aç. Üstteki sayaç `/api/status` üzerinden okunur; sohbet `/api/chat` üzerinden Groq'a gider.
+
+## Yerel geliştirme
+Node.js 20+ ve Netlify CLI kurulu olmalı:
+```bash
+npm install
+npx netlify dev
+```
+Netlify Dev ortamında `GROQ_API_KEY` değişkenini yerel ortamına güvenli biçimde tanımla. Gerçek anahtarı kaynak dosyalara koyma.
+
+## Test
+Deploy sonrası tarayıcı geliştirici araçlarında Network bölümünden:
+- `GET /api/status?browserId=...` → HTTP 200 ve `remaining` alanı
+- `POST /api/chat` → HTTP 200, `answer` ve `remaining` alanı
+kontrol edilebilir. API anahtarı istemci isteklerinde bulunmamalıdır.
+
+## Kota ve güvenlik sınırları — önemli
+- Kota verisi tarayıcıdaki sayaçta değil Netlify Blobs üzerinde tutulur ve gün anahtarı `Europe/Istanbul` saat dilimine göre hesaplanır.
+- Bu sürüm, aynı tarayıcı kimliğini kullanan normal ardışık isteklerde günlük 100 başarılı yanıt uygular.
+- Kimlik doğrulama sistemi olmadığı için kullanıcı tarayıcı depolamasını temizleyip yeni bir kimlik üreterek kotayı aşabilir. Bu nedenle bu, doğrulanmış kişi başına kesin kota değildir.
+- Netlify Blobs'in temel okuma/yazma işlemleri atomik sayaç artırımı sağlamaz. Aynı kimlikle eşzamanlı istekler farklı Function örneklerine düşerse nadir yarış durumlarında 100 sınırı aşılabilir. Kesin ve kötüye kullanıma dayanıklı kullanıcı kotası için kimlik doğrulama ve atomik işlem destekleyen bir veritabanı (ör. Postgres/RPC transaction) gerekir.
+- Bu proje Groq yanıtlarını üretir; mevcut arayüzde web arama aracı yoktur. Canlı haber veya kaynak taraması yaptığı iddia edilmez.
+- Gerçek Groq API testi, geçerli bir `GROQ_API_KEY` ve Netlify dağıtımı olmadan bu ortamda yapılamaz. Kodun teslim edilmesi canlı testin yapıldığı anlamına gelmez.
